@@ -1,0 +1,12 @@
+{
+  "run_list": [ 
+	"recipe[yum-epel]",
+	"recipe[prepareForRedmine]",
+	"recipe[ruby-env]",
+	"recipe[mysql-server]",
+	"recipe[redmine]"
+  ],
+  "automatic": {
+    "ipaddress": "centos"
+  }
+}

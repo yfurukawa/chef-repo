@@ -1,0 +1,20 @@
+site :opscode
+
+cookbook 'yum-epel'
+cookbook "vim", path: "./site-cookbooks/vim"
+cookbook "prepareForRedmine", path: "./site-cookbooks/prepareForRedmine"
+cookbook "ruby-env", path: "./site-cookbooks/ruby-env"
+cookbook "mysql-server", path: "./site-cookbooks/mysql-server"
+cookbook "redmine", path: "./site-cookbooks/redmine"
+cookbook "boost", path: "./site-cookbooks/boost"
+cookbook "cccc", path: "./site-cookbooks/cccc"
+cookbook "cppcheck", path: "./site-cookbooks/cppcheck"
+cookbook "eclipse", path: "./site-cookbooks/eclipse"
+cookbook "ftp", path: "./site-cookbooks/ftp"
+cookbook "gcc", path: "./site-cookbooks/gcc"
+cookbook "graphviz", path: "./site-cookbooks/graphviz"
+cookbook "gtest", path: "./site-cookbooks/gtest"
+cookbook "jenkins", path: "./site-cookbooks/jenkins"
+cookbook "ntp", path: "./site-cookbooks/ntp"
+cookbook "valgrind", path: "./site-cookbooks/valgrind"
+cookbook "xgdm_setting", path: "./site-cookbooks/xgdm_setting"

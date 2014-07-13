@@ -1,0 +1,2 @@
+GRANT ALL ON <%= node['redmine']['database']%>.* to <%= node['redmine']['user'] %>@localhost IDENTIFIED BY '<%=node['redmine']['user_password']%>' WITH GRANT OPTION;
+
