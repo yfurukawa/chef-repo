@@ -1,54 +1,54 @@
 #
-# Cookbook Name:: gcc4.8.2
+# Cookbook Name:: gcc
 # Recipe:: default
 #
 # Copyright 2014, YOUR_COMPANY_NAME
 #
 # All rights reserved - Do Not Redistribute
 #
-execute "gmp" do
+execute "gmp_#{node['gmp']['version']}" do
 	command <<-EOH
 		cd /tmp
-		wget https://ftp.gnu.org/gnu/gmp/gmp-6.0.0a.tar.bz2
-		tar xjf gmp-6.0.0a.tar.bz2
-		cd gmp-6.0.0
-		./configure --prefix=/usr/local --libdir=/usr/local/lib64
+		wget #{node['gmp']['gmp_url']}/gmp-#{node['gmp']['version']}#node['gmp']['version_prefix'].tar.bz2
+		tar xjf gmp-#{node['gmp']['version']}#node['gmp']['version_prefix'].tar.bz2
+		cd gmp-#{node['gmp']['version']}
+		./configure --prefix=#{node['gnu']['prefix']} --libdir=#{node['gnu']['prefix']}/#{node['gnu']['libdir']}
 		make -j4
 		make check
 		make install
 		cd ..
 	EOH
-	not_if { File.exists?("/usr/local/lib64/libgmp.a") }
+	not_if { File.exists?("#{node['gnu']['prefix']}/#{node['gnu']['libdir']}/libgmp.a") }
 end
 
-execute "mpfr" do
+execute "mpfr_#{node['mpfr']['version']}#{node['mpfr']['version_prefix']}" do
 	command <<-EOH
 		cd /tmp
-		wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.bz2
-		tar xjf mpfr-3.1.2.tar.bz2
-		cd mpfr-3.1.2
-		./configure --prefix=/usr/local --libdir=/usr/local/lib64 --with-gmp-include=/usr/local/include --with-gmp-lib=/usr/local/lib64
+		wget #{node['mpfr']['mpfr_url']}/mpfr-#{node['mpfr']['version']}#{node['mpfr']['version_prefix']}.tar.bz2
+		tar xjf mpfr-#{node['mpfr']['version']}#{node['mpfr']['version_prefix']}.tar.bz2
+		cd mpfr-#{node['mpfr']['version']}
+		./configure --prefix=#{node['gnu']['prefix']} --libdir=#{node['gnu']['prefix']}/#{node['gnu']['libdir']} --with-gmp-include=#{node['gnu']['prefix']}/#{node['gnu']['include']} --with-gmp-lib=#{node['gnu']['prefix']}/#{node['gnu']['libdir']}
 		make -j4
 		make check
 		make install
 		cd ..
 	EOH
-	not_if { File.exists?("/usr/local/lib64/libmpfr.a") }
+	not_if { File.exists?("#{node['gnu']['prefix']}/#{node['gnu']['libdir']}libmpfr.a") }
 end
 
-execute "mpc" do
+execute "mpc_#{node['mpc']['version']}#{node['mpc']['version_prefix']}" do
 	command <<-EOH
 		cd /tmp
-		wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz
-		tar xzf mpc-1.0.2.tar.gz
-		cd mpc-1.0.2
-		./configure --prefix=/usr/local --libdir=/usr/local/lib64 --with-gmp-include=/usr/local/include --with-gmp-lib=/usr/local/lib64 --with-mpfr-include=/usr/local/include --with-mpfr-lib=/usr/local/lib64
+		wget #{node['mpc']['mpc_url']}/mpc-#{node['mpc']['version']}#{node['mpc']['version_prefix']}.tar.gz
+		tar xzf mpc-#{node['mpc']['version']}#{node['mpc']['version_prefix']}.tar.gz
+		cd mpc-#{node['mpc']['version']}
+		./configure --prefix=#{node['gnu']['prefix']} --libdir=#{node['gnu']['prefix']}/#{node['gnu']['libdir']} --with-gmp-include=#{node['gnu']['prefix']}/#{node['gnu']['include']} --with-gmp-lib=#{node['gnu']['prefix']}/#{node['gnu']['libdir']} --with-mpfr-include=#{node['gnu']['prefix']}/#{node['gnu']['include']} --with-mpfr-lib=#{node['gnu']['prefix']}/#{node['gnu']['libdir']}
 		make -j4
 		make check
 		make install
 		cd ..
 	EOH
-	not_if { File.exists?("/usr/local/lib64/libmpc.a") }
+	not_if { File.exists?("#{node['gnu']['prefix']}/#{node['gnu']['libdir']}/libmpc.a") }
 end
 
 template "gnu-tools.conf" do
@@ -64,20 +64,20 @@ execute "ldUpdate" do
 	action :run
 end
 
-execute "gcc4.8.2" do
+execute "gcc_#{node['gcc']['version']}#{node['gcc']['version_prefix']}" do
 	command <<-EOH
 		cd /tmp
-		wget http://ftp.gnu.org/gnu/gcc/gcc-4.8.2/gcc-4.8.2.tar.bz2 
-		tar xjf gcc-4.8.2.tar.bz2
-		cd gcc-4.8.2
+		wget #{node['gcc']['gcc_url']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2 
+		tar xjf gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2
+		cd gcc-#{node['gcc']['version']}
 		mkdir build
 		cd build
-		../configure --enable-languages=c,c++ --disable-multilib --with-gmp-include=/usr/local/include --with-gmp-lib=/usr/local/lib64 --with-mpfr-include=/usr/local/include --with-mpfr-lib=/usr/local/lib64 --with-mpc-include=/usr/local/include --with-mpc-lib=/usr/local/lib64
+		../configure --enable-languages=c,c++ --disable-multilib --with-gmp-include=#{node['gnu']['prefix']}/#{node['gnu']['include']} --with-gmp-lib=#{node['gnu']['prefix']}/#{node['gnu']['libdir']} --with-mpfr-include=#{node['gnu']['prefix']}/#{node['gnu']['include']} --with-mpfr-lib=#{node['gnu']['prefix']}/#{node['gnu']['libdir']} --with-mpc-include=#{node['gnu']['prefix']}/#{node['gnu']['include']} --with-mpc-lib=#{node['gnu']['prefix']}/#{node['gnu']['libdir']}
 		make -j4
 		make install
 		ldconfig
 		cd ..
 	EOH
-	not_if { File.exists?("/usr/local/bin/gcc") }
+	not_if { File.exists?("#{node['gnu']['prefix']}/bin/gcc") }
 end
 
