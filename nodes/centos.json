@@ -4,7 +4,8 @@
 	"recipe[prepareForRedmine]",
 	"recipe[ruby-env]",
 	"recipe[mysql-server]",
-	"recipe[redmine]"
+	"recipe[redmine]",
+	"recipe[gcc]"
   ],
   "automatic": {
     "ipaddress": "centos"
