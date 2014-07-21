@@ -10,9 +10,9 @@ end
 bash "install backlogs plugin" do
 	code <<-EOH
 		cd #{node['redmine']['install_dir']}/plugins/redmine_backlogs
-		/home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/bundle install --without development test
+		/usr/local/bin/bundle install --without development test
 		cd #{node['redmine']['install_dir']}
-		RAILS_ENV=production /home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/bundle exec rake redmine:backlogs:install
+		RAILS_ENV=production /usr/local/bin/bundle exec rake redmine:backlogs:install
 	EOH
 end
 
