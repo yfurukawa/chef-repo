@@ -82,31 +82,31 @@ end
 bash "install related gems" do
   code <<-EOH
     cd #{node['redmine']['install_dir']}
-    /home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/bundle install --without development test
+    /usr/local/bin/bundle install --without development test
   EOH
 end
 
 bash "create secret token" do
   code <<-EOH
     cd #{node['redmine']['install_dir']}
-    /home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/bundle exec rake generate_secret_token
-    RAILS_ENV=production /home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/bundle exec rake db:migrate
+    /usr/local/bin/bundle exec rake generate_secret_token
+    RAILS_ENV=production /usr/local/bin/bundle exec rake db:migrate
   EOH
 end
 
 execute "install passenger module" do
-  command "/home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/passenger-install-apache2-module < /bin/echo '1'"
-  not_if { File.exists?("/home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/lib/ruby/gems/1.9.1/gems/passenger-4.0.45/buildout/apache2/mod_passenger.so") }
+  command "/usr/local/bin/passenger-install-apache2-module < /bin/echo '1'"
+  not_if { File.exists?("/usr/local/lib/ruby/gems/1.9.1/gems/passenger-4.0.45/buildout/apache2/mod_passenger.so") }
 end
 
 execute "create passenger.conf" do
   command <<-EOH
-    /home/#{node['ruby-env']['user']}/.rbenv/versions/#{node['ruby-env']['version']}/bin/passenger-install-apache2-module --snippet > /etc/httpd/conf.d/passenger.conf
+    /usr/local/bin/passenger-install-apache2-module --snippet > /etc/httpd/conf.d/passenger.conf
   EOH
   not_if { File.exists?("/etc/httpd/conf.d/passenger.conf") }
 end
 
-include_recipe "redmine_plugins::default"
+#include_recipe "redmine_plugins::default"
 
 execute "change owner of redmine" do
   command <<-EOH
