@@ -19,5 +19,5 @@ execute "mpfr_#{node['mpfr']['version']}#{node['mpfr']['version_prefix']}" do
 		make install
 		cd ..
 	EOH
-	not_if { File.exists?("#{node['gnu']['prefix']}/#{node['gnu']['libdir']}libmpfr.a") }
+	not_if { File.exists?("#{node['gnu']['prefix']}/#{node['gnu']['libdir']}/libmpfr.a") }
 end
