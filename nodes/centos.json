@@ -2,10 +2,20 @@
   "run_list": [ 
 	"recipe[yum-epel]",
 	"recipe[prepareForRedmine]",
-	"recipe[ruby-env]",
+	"recipe[ruby]",
 	"recipe[mysql-server]",
 	"recipe[redmine]",
-	"recipe[gcc]"
+	"recipe[gcc]",
+	"recipe[boost]",
+	"recipe[cccc]",
+	"recipe[gtest]",
+	"recipe[graphviz]",
+	"recipe[cppcheck]",
+	"recipe[eclipse]",
+	"recipe[ftp]",
+	"recipe[valgrind]",
+	"recipe[ntp]",
+	"recipe[doxygen]"
   ],
   "automatic": {
     "ipaddress": "centos"

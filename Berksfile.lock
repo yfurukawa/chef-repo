@@ -5,6 +5,8 @@ DEPENDENCIES
     path: site-cookbooks/cccc
   cppcheck
     path: site-cookbooks/cppcheck
+  doxygen
+    path: site-cookbooks/doxygen
   eclipse
     path: site-cookbooks/eclipse
   ftp
@@ -15,6 +17,8 @@ DEPENDENCIES
     path: site-cookbooks/graphviz
   gtest
     path: site-cookbooks/gtest
+  java
+    path: site-cookbooks/java
   jenkins
     path: site-cookbooks/jenkins
   mysql-server
@@ -43,11 +47,13 @@ GRAPH
   boost (0.1.0)
   cccc (0.1.0)
   cppcheck (0.1.0)
+  doxygen (0.1.0)
   eclipse (0.1.0)
   ftp (0.1.0)
   gcc (0.1.0)
   graphviz (0.1.0)
   gtest (0.1.0)
+  java (0.1.0)
   jenkins (0.1.0)
   mysql-server (0.1.0)
   ntp (0.1.0)
