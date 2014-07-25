@@ -15,7 +15,6 @@ end
 
 execute "Download ruby" do
 	command <<-EOH
-		log "#{Chef::Config[:file_cache_path]}"
 		cd #{Chef::Config[:file_cache_path]}
 		wget #{node['ruby']['ruby_url']}/ruby-#{node['ruby']['version']}.tar.bz2
 	EOH
