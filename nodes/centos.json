@@ -15,7 +15,9 @@
 	"recipe[ftp]",
 	"recipe[valgrind]",
 	"recipe[ntp]",
-	"recipe[doxygen]"
+	"recipe[doxygen]",
+	"recipe[java]",
+	"recipe[jenkins]"
   ],
   "automatic": {
     "ipaddress": "centos"

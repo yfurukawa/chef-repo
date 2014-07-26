@@ -18,7 +18,6 @@ DEPENDENCIES
   gtest
     path: site-cookbooks/gtest
   java
-    path: site-cookbooks/java
   jenkins
     path: site-cookbooks/jenkins
   mysql-server
@@ -53,7 +52,7 @@ GRAPH
   gcc (0.1.0)
   graphviz (0.1.0)
   gtest (0.1.0)
-  java (0.1.0)
+  java (1.24.0)
   jenkins (0.1.0)
   mysql-server (0.1.0)
   ntp (0.1.0)
