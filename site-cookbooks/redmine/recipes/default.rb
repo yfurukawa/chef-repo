@@ -96,7 +96,7 @@ end
 
 execute "install passenger module" do
   command "/usr/local/bin/passenger-install-apache2-module < /bin/echo '1'"
-  not_if { File.exists?("/usr/local/lib/ruby/gems/1.9.1/gems/passenger-4.0.46/buildout/apache2/mod_passenger.so") }
+  not_if 'find /usr/local/lib/ruby/gems -name mod_passenger.so | grep passenger'
 end
 
 execute "create passenger.conf" do
