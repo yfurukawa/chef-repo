@@ -7,13 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 execute "cppcheck" do
-  program = "cppcheck-1.62"
-  tarball = "#{program}.tar.bz2"
   command <<-EOH
     cd #{Chef::Config[:file_cache_path]}
-    wget http://sourceforge.net/projects/cppcheck/files/cppcheck/1.62/#{tarball}
-    tar xjf #{tarball}
-    cd #{program}
+    wget #{node['cppcheck']['download_url']}/#{node['cppcheck']['version']}/cppcheck-#{node['cppcheck']['version']}.tar.bz2
+    tar xjf cppcheck-#{node['cppcheck']['version']}.tar.bz2
+    cd cppcheck-#{node['cppcheck']['version']}
     make
     make install
   EOH
