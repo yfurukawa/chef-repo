@@ -32,7 +32,7 @@ include_recipe "mysql-server::createDatabaseForRedmine"
 
 bash "download redmine" do
   code <<-EOH
-    cd /tmp
+    cd #{Chef::Config[:file_cache_path]}
     wget http://www.redmine.org/releases/redmine-#{node['redmine']['version']}.tar.gz
   EOH
   not_if { File.exists?("/tmp/redmine-#{node['redmine']['version']}.tar.gz") }
@@ -40,7 +40,7 @@ end
 
 bash "install redmine" do
   code <<-EOH
-    cd /tmp
+    cd #{Chef::Config[:file_cache_path]}
     tar xzf redmine-#{node['redmine']['version']}.tar.gz
     mv redmine-#{node['redmine']['version']} redmine
     mv redmine #{node['redmine']['install_dir']}
