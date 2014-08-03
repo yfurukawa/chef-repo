@@ -7,24 +7,22 @@
 # All rights reserved - Do Not Redistribute
 #
 bash "boost" do
-	program = "boost_1_55_0"
-	tarball = "#{program}.tar.bz2"
-	user "root"
-	code <<-EOH
-		cd /tmp
-		wget http://sourceforge.net/projects/boost/files/boost/1.55.0/#{tarball}
-		tar xjf #{tarball}
-		cd #{program}
-		./bootstrap.sh
-		./b2 install -j8 --prefix=/usr/local
-		cd ..
-	EOH
-	not_if "/sbin/ldconfig -v | grep boost"
+  user "root"
+  code <<-EOH
+    cd #{Chef::Config[:file_cache_path]}
+    wget #{node['boost']['download_url']}/#{node['boost']['version']}/#{node['boost']['program_name']}.tar.bz2
+    tar xjf #{node['boost']['program_name']}.tar.bz2
+    cd #{node['boost']['program_name']}
+    ./bootstrap.sh
+    ./b2 install -j8 --prefix=/usr/local
+    cd ..
+  EOH
+  not_if "/sbin/ldconfig -v | grep boost"
 end
 
 execute "ldconfig" do
-	user "root"
-	command "/sbin/ldconfig"
-	action :nothing
+  user "root"
+  command "/sbin/ldconfig"
+  action :nothing
 end
 
