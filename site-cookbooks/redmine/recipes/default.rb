@@ -89,8 +89,8 @@ end
 bash "create secret token" do
   code <<-EOH
     cd #{node['redmine']['install_dir']}
-    /usr/local/bin/bundle exec rake generate_secret_token
-    RAILS_ENV=production /usr/local/bin/bundle exec rake db:migrate
+    /usr/local/bin/bundle exec /usr/local/bin/rake generate_secret_token
+    RAILS_ENV=production /usr/local/bin/bundle exec /usr/local/bin/rake db:migrate
   EOH
 end
 
