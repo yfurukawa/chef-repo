@@ -1,7 +1,6 @@
 {
   "run_list": [ 
 	"recipe[yum-epel]",
-	"recipe[graphviz]",
 	"recipe[prepareForRedmine]",
 	"recipe[ruby]",
 	"recipe[mysql-server]",
@@ -15,6 +14,7 @@
 	"recipe[ftp]",
 	"recipe[valgrind]",
 	"recipe[ntp]",
+	"recipe[graphviz]",
 	"recipe[doxygen]",
 	"recipe[java]",
 	"recipe[jenkins]"

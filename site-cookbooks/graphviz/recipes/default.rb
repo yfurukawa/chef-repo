@@ -7,6 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
+if #{node[:languages][:ruby][:version]} <> "1.9.3" 
+	include_recipe "ruby::default"
+end
+
 execute "prepare repo for graphviz" do
 	command "wget -O #{node['graphviz']['repo']} #{node['graphviz']['download_repo']}"
 	action :run
