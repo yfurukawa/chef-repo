@@ -1,3 +1,5 @@
+default['redmine_plugins']['backlogs'] = false
+
 default['mysql']['user'] = "mysql"
 default['mysql']['group'] = "mysql"
 default['mysql']['server_root_password'] = "Ken6en"

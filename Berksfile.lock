@@ -13,13 +13,19 @@ DEPENDENCIES
     path: site-cookbooks/ftp
   gcc
     path: site-cookbooks/gcc
+  ghostscript
+    path: site-cookbooks/ghostscript
   graphviz
     path: site-cookbooks/graphviz
   gtest
     path: site-cookbooks/gtest
+  inkscape
+    path: site-cookbooks/inkscape
   java
   jenkins
     path: site-cookbooks/jenkins
+  latex
+    path: site-cookbooks/latex
   mysql-server
     path: site-cookbooks/mysql-server
   ntp
@@ -50,10 +56,13 @@ GRAPH
   eclipse (0.1.0)
   ftp (0.1.0)
   gcc (0.1.0)
+  ghostscript (0.1.0)
   graphviz (0.1.0)
   gtest (0.1.0)
+  inkscape (0.1.0)
   java (1.24.0)
   jenkins (0.1.0)
+  latex (0.1.0)
   mysql-server (0.1.0)
   ntp (0.1.0)
   prepareForRedmine (0.1.0)

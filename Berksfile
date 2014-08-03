@@ -1,6 +1,7 @@
-site :opscode
+source 'https://api.berkshelf.com'
 
 cookbook 'yum-epel'
+cookbook "java"
 cookbook "vim", path: "./site-cookbooks/vim"
 cookbook "prepareForRedmine", path: "./site-cookbooks/prepareForRedmine"
 cookbook "ruby-env", path: "./site-cookbooks/ruby-env"
@@ -21,4 +22,6 @@ cookbook "valgrind", path: "./site-cookbooks/valgrind"
 cookbook "xgdm_setting", path: "./site-cookbooks/xgdm_setting"
 cookbook "ruby", path: "./site-cookbooks/ruby"
 cookbook "doxygen", path: "./site-cookbooks/doxygen"
-cookbook "java"
+cookbook "ghostscript", path: "./site-cookbooks/ghostscript"
+cookbook "latex", path: "./site-cookbooks/latex"
+cookbook "inkscape", path: "./site-cookbooks/inkscape"

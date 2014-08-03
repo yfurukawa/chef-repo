@@ -58,7 +58,7 @@ execute "rbenv global #{node['ruby-env']['version']}" do
 	environment 'HOME' => "/home/#{node['ruby-env']['user']}"
 end
 
-%w{rbenv-rehash bundler passenger}.each do |gem|
+%w{rbenv-rehash bundler passenger inifile}.each do |gem|
 	execute "gem install #{gem}" do
 		command "/home/#{node['ruby-env']['user']}/.rbenv/shims/gem install #{gem}"
 		user node['ruby-env']['user']

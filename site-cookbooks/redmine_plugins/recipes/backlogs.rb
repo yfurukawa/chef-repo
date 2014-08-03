@@ -12,6 +12,7 @@ bash "install backlogs plugin" do
 		cd #{node['redmine']['install_dir']}/plugins/redmine_backlogs
 		/usr/local/bin/bundle install --without development test
 		cd #{node['redmine']['install_dir']}
+		RAILS_ENV=production /usr/local/bin/rake redmine:plugins:migrate
 		RAILS_ENV=production /usr/local/bin/bundle exec rake redmine:backlogs:install
 	EOH
 end
