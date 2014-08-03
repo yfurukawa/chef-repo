@@ -35,7 +35,7 @@ bash "download redmine" do
     cd #{Chef::Config[:file_cache_path]}
     wget http://www.redmine.org/releases/redmine-#{node['redmine']['version']}.tar.gz
   EOH
-  not_if { File.exists?("/tmp/redmine-#{node['redmine']['version']}.tar.gz") }
+  not_if { File.exists?("#{Chef::Config[:file_cache_path]}/redmine-#{node['redmine']['version']}.tar.gz") }
 end
 
 bash "install redmine" do
