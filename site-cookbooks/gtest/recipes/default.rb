@@ -9,22 +9,17 @@
 execute "gtest" do
   command <<-EOH
     cd #{Chef::Config[:file_cache_path]}
-    wget https://googlemock.googlecode.com/files/gmock-1.7.0.zip
-    unzip gmock-1.7.0.zip
-    cd gmock-1.7.0
+    wget #{node['gtest']['download_url']}/gmock-#{node['gtest']['version']}.zip
+    unzip gmock-#{node['gtest']['version']}.zip
+    cd gmock-#{node['gtest']['version']}
     ./configure
     make
-    cd include
-    cp -R gmock /usr/local/include/
-    cd ../lib/.libs
-    mv * /usr/local/lib64
-    cd ../../gtest/include
-    cp -R gtest /usr/local/include/
-    cd ../lib/.libs
-    mv * /usr/local/lib64
-    cd #{Chef::Config[:file_cache_path]}
+    cp -R include/gmock #{node['gtest']['include_dir']}
+    mv gmock/lib/.libs/* #{node['gtest']['lib_dir']}
+    cp -R gtest/include/gtest #{node['gtest']['include_dir']}
+    mv gtest/lib/.libs/* #{node['gtest']['lib_dir']}
     ldconfig
   EOH
-  not_if { File.exists?("/usr/local/include/gtest") }
+  not_if { Dir.exists?("#{node['gtest']['include_dir']}/gtest") }
 end
 

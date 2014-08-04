@@ -7,33 +7,29 @@
 # All rights reserved - Do Not Redistribute
 #
 bash "eclipse" do
-  program = "eclipse-standard-kepler-SR2-linux-gtk-x86_64"
-  tarball = "#{program}.tar.gz"
   user = "root"
   code <<-EOH
     cd #{Chef::Config[:file_cache_path]}
-    wget http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/kepler/SR2/#{tarball}
-    tar xzf #{tarball}
-    cp -R eclipse/ /usr/local/bin/
-    code 'echo "export PATH=$PATH:/usr/local/bin/eclipse" >> /etc/bashrc'
+    mkdir #{node['eclipse']['eclipse_base']}
+    wget #{node['eclipse']['eclipse_download_url']}/#{node['eclipse']['eclipse_base']}.tar.gz
+    tar xzf #{node['eclipse']['eclipse_base']}.tar.gz
+    mv -R eclipse/* #{node['eclipse']['eclipse_base']}
+    code 'echo "export PATH=$PATH:#{node['eclipse']['eclipse_base']}" >> /etc/bashrc'
   EOH
-  not_if { Dir.exists?("/usr/local/bin/eclipse") }
+  not_if { Dir.exists?("#{node['eclipse']['eclipse_base']}") }
 end
 
-eclipseHome = "/usr/local/bin/eclipse"
 bash "cdt" do
-  program = "cdt-master-8.3.0"
-  zipFile = "#{program}.zip"
   user = "root"
   code <<-EOH
     mkdir #{Chef::Config[:file_cache_path]}/cdt
     cd #{Chef::Config[:file_cache_path]}/cdt
-    wget http://ftp.jaist.ac.jp/pub/eclipse/tools/cdt/releases/kepler/sr2/#{zipFile}
-    unzip #{zipFile}
-    cp -R plugins/* #{eclipseHome}/plugins/
-    cp -R features/* #{eclipseHome}/features/
+    wget #{node['eclipse']['cdt_download_url']}/cdt-master-#{node['eclipse']['cdt_version']}.zip
+    unzip cdt-master-#{node['eclipse']['cdt_version']}
+    cp -R plugins/* #{node['eclipse']['eclipse_home']}/plugins/
+    cp -R features/* #{node['eclipse']['eclipse_home']}/features/
   EOH
-  not_if{ File.exists?("#{eclipseHome}/plugins/org.eclipse.cdt_8.3.0.201402142303.jar") }
+  not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/plugins/org.eclipse.cdt_#{node['eclipse']['cdt_version']}.*.jar") }
 end
 
 pleiadesTmpDir = "#{Chef::Config[:file_cache_path]}/pleiades"
@@ -51,11 +47,11 @@ bash "pleiades" do
   code <<-EOH
     cd "#{pleiadesTmpDir}"
     unzip #{pleiadesFile}
-    cp -R #{pleiadesTmpDir}/plugins/* #{eclipseHome}/plugins/
-    cp -R #{pleiadesTmpDir}/features/* #{eclipseHome}/features/
-    echo "-javaagent:#{eclipseHome}/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" >> #{eclipseHome}/eclipse.ini
+    cp -R #{pleiadesTmpDir}/plugins/* #{node['eclipse']['eclipse_home']}/plugins/
+    cp -R #{pleiadesTmpDir}/features/* #{node['eclipse']['eclipse_home']}/features/
+    echo "-javaagent:#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" >> #{eclipseHome}/eclipse.ini
   EOH
-  not_if{ File.exists?("#{eclipseHome}/plugins/jp.sourceforge.mergedoc.pleiades") }
+  not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades") }
 end
 
 template "/usr/share/applications/eclipse.desktop" do
