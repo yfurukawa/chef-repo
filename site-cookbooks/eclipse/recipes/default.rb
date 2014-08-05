@@ -20,7 +20,7 @@ bash "eclipse" do
     cd #{Chef::Config[:file_cache_path]}
     wget #{node['eclipse']['eclipse_download_url']}/#{node['eclipse']['eclipse_base']}.tar.gz
     tar xzf #{node['eclipse']['eclipse_base']}.tar.gz
-    mv -R eclipse/* #{node['eclipse']['eclipse_home']}
+    mv eclipse/* #{node['eclipse']['eclipse_home']}
     code 'echo "export PATH=$PATH:#{node['eclipse']['eclipse_home']}" >> /etc/bashrc'
   EOH
   not_if { Dir.exists?("#{node['eclipse']['eclipse_home']}") }
@@ -39,8 +39,8 @@ bash "cdt" do
     cd #{Chef::Config[:file_cache_path]}/cdt
     wget #{node['eclipse']['cdt_download_url']}/cdt-master-#{node['eclipse']['cdt_version']}.zip
     unzip cdt-master-#{node['eclipse']['cdt_version']}
-    cp -R plugins/* #{node['eclipse']['eclipse_home']}/plugins/
-    cp -R features/* #{node['eclipse']['eclipse_home']}/features/
+    mv plugins/* #{node['eclipse']['eclipse_home']}/plugins/
+    mv features/* #{node['eclipse']['eclipse_home']}/features/
   EOH
   not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/plugins/org.eclipse.cdt_#{node['eclipse']['cdt_version']}.*.jar") }
 end
@@ -60,8 +60,8 @@ bash "pleiades" do
   code <<-EOH
     cd "#{Chef::Config[:file_cache_path]}/pleiades"
     unzip #{node['eclipse']['pleiadesFile']}
-    cp -R #{Chef::Config[:file_cache_path]}/pleiades/plugins/* #{node['eclipse']['eclipse_home']}/plugins/
-    cp -R #{Chef::Config[:file_cache_path]}/pleiades/features/* #{node['eclipse']['eclipse_home']}/features/
+    mv plugins/* #{node['eclipse']['eclipse_home']}/plugins/
+    mv features/* #{node['eclipse']['eclipse_home']}/features/
     echo "-javaagent:#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" >> #{node['eclipse']['eclipse_home']}/eclipse.ini
   EOH
   not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades") }
