@@ -6,11 +6,18 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+directory "#{node['eclipse']['eclipse_base']}" do
+  owner "root"
+  group "root"
+  mode 00755
+  action :create
+end
+
 bash "eclipse" do
   user = "root"
   code <<-EOH
     cd #{Chef::Config[:file_cache_path]}
-    mkdir #{node['eclipse']['eclipse_base']}
     wget #{node['eclipse']['eclipse_download_url']}/#{node['eclipse']['eclipse_base']}.tar.gz
     tar xzf #{node['eclipse']['eclipse_base']}.tar.gz
     mv -R eclipse/* #{node['eclipse']['eclipse_base']}
@@ -19,10 +26,16 @@ bash "eclipse" do
   not_if { Dir.exists?("#{node['eclipse']['eclipse_base']}") }
 end
 
+directory "#{Chef::Config[:file_cache_path]}/cdt" do
+  owner "root"
+  group "root"
+  mode 00755
+  action :create
+end
+
 bash "cdt" do
   user = "root"
   code <<-EOH
-    mkdir #{Chef::Config[:file_cache_path]}/cdt
     cd #{Chef::Config[:file_cache_path]}/cdt
     wget #{node['eclipse']['cdt_download_url']}/cdt-master-#{node['eclipse']['cdt_version']}.zip
     unzip cdt-master-#{node['eclipse']['cdt_version']}
@@ -32,24 +45,24 @@ bash "cdt" do
   not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/plugins/org.eclipse.cdt_#{node['eclipse']['cdt_version']}.*.jar") }
 end
 
-pleiadesTmpDir = "#{Chef::Config[:file_cache_path]}/pleiades"
-bash "makeTmpDir" do
-  user = "root"
-  code "mkdir -p #{pleiadesTmpDir}"
+directory "#{Chef::Config[:file_cache_path]}/pleiades" do
+  owner "root"
+  group "root"
+  mode 00755
+  action :create
 end
 
-pleiadesFile = "pleiades.zip"
-cookbook_file "#{pleiadesTmpDir}/#{pleiadesFile}"do
-  source "#{pleiadesFile}"
+cookbook_file "#{Chef::Config[:file_cache_path]}/pleiades/#{node['eclipse']['pleiadesFile']}"do
+  source "#{node['eclipse']['pleiadesFile']}"
 end
 
 bash "pleiades" do
   code <<-EOH
-    cd "#{pleiadesTmpDir}"
-    unzip #{pleiadesFile}
-    cp -R #{pleiadesTmpDir}/plugins/* #{node['eclipse']['eclipse_home']}/plugins/
-    cp -R #{pleiadesTmpDir}/features/* #{node['eclipse']['eclipse_home']}/features/
-    echo "-javaagent:#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" >> #{eclipseHome}/eclipse.ini
+    cd "#{Chef::Config[:file_cache_path]}/pleiades"
+    unzip #{node['eclipse']['pleiadesFile']}
+    cp -R #{Chef::Config[:file_cache_path]}/pleiades/plugins/* #{node['eclipse']['eclipse_home']}/plugins/
+    cp -R #{Chef::Config[:file_cache_path]}/pleiades/features/* #{node['eclipse']['eclipse_home']}/features/
+    echo "-javaagent:#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" >> #{node['eclipse']['eclipse_home']}/eclipse.ini
   EOH
   not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/plugins/jp.sourceforge.mergedoc.pleiades") }
 end
