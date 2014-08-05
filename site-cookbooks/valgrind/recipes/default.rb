@@ -8,17 +8,15 @@
 #
 
 execute "valgrind" do
-  program = "valgrind-3.9.0"
-  tarball = "#{program}.tar.bz2"
   command <<-EOH
     cd #{Chef::Config[:file_cache_path]}
-    wget http://valgrind.org/downloads/#{tarball}
-    tar xjf #{tarball}
-    cd #{program}
-    ./configure
+    wget #{node['valgrind']['download_url']}/valgrind-#{node['valgrind']['version']}.tar.bz2
+    tar xjf valgrind-#{node['valgrind']['version']}.tar.bz2
+    cd valgrind-#{node['valgrind']['version']}
+    ./configure --prefix=#{node['valgrind']['prefix']}
     make
     make install
   EOH
-  not_if{ File.exists?("/usr/local/bin/valgrind") }
+  not_if{ File.exists?("#{node['valgrind']['prefix']}/bin/valgrind") }
 end
 
