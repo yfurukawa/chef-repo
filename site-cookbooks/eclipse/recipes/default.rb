@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-directory "#{node['eclipse']['eclipse_base']}" do
+directory "#{node['eclipse']['eclipse_home']}" do
   owner "root"
   group "root"
   mode 00755
@@ -20,10 +20,10 @@ bash "eclipse" do
     cd #{Chef::Config[:file_cache_path]}
     wget #{node['eclipse']['eclipse_download_url']}/#{node['eclipse']['eclipse_base']}.tar.gz
     tar xzf #{node['eclipse']['eclipse_base']}.tar.gz
-    mv -R eclipse/* #{node['eclipse']['eclipse_base']}
-    code 'echo "export PATH=$PATH:#{node['eclipse']['eclipse_base']}" >> /etc/bashrc'
+    mv -R eclipse/* #{node['eclipse']['eclipse_home']}
+    code 'echo "export PATH=$PATH:#{node['eclipse']['eclipse_home']}" >> /etc/bashrc'
   EOH
-  not_if { Dir.exists?("#{node['eclipse']['eclipse_base']}") }
+  not_if { Dir.exists?("#{node['eclipse']['eclipse_home']}") }
 end
 
 directory "#{Chef::Config[:file_cache_path]}/cdt" do
