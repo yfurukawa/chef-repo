@@ -1,5 +1,8 @@
-default['redmine_plugins']['backlogs'] = false
+default['redmine_plugins']['backlogs']['need'] = false
+default['redmine_plugins']['backlogs']['repository_url'] = "https://github.com/backlogs/redmine_backlogs.git"
+default['redmine_plugins']['backlogs']['need'] =
 
+default['ruby']['install_dir'] = "/usr/local"
 default['mysql']['user'] = "mysql"
 default['mysql']['group'] = "mysql"
 default['mysql']['server_root_password'] = "Ken6en"
