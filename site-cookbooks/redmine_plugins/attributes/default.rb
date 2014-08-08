@@ -1,6 +1,10 @@
 default['redmine_plugins']['backlogs']['need'] = false
 default['redmine_plugins']['backlogs']['repository_url'] = "https://github.com/backlogs/redmine_backlogs.git"
-default['redmine_plugins']['backlogs']['need'] =
+
+default['redmine_plugins']['hudson']['need'] = false
+default['redmine_plugins']['hudson']['download_url'] = "https://bitbucket.org/nobiinu_and/redmine_hudson/downloads"
+default['redmine_plugins']['hudson']['version'] = "2.1.2"
+
 
 default['ruby']['install_dir'] = "/usr/local"
 default['mysql']['user'] = "mysql"
