@@ -17,7 +17,8 @@
 	"recipe[graphviz]",
 	"recipe[doxygen]",
 	"recipe[java]",
-	"recipe[jenkins]"
+	"recipe[jenkins]",
+	"recipe[glances]"
   ],
   "automatic": {
     "ipaddress": "centos"

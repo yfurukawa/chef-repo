@@ -15,6 +15,8 @@ DEPENDENCIES
     path: site-cookbooks/gcc
   ghostscript
     path: site-cookbooks/ghostscript
+  glances
+    path: site-cookbooks/glances
   graphviz
     path: site-cookbooks/graphviz
   gtest
@@ -57,6 +59,7 @@ GRAPH
   ftp (0.1.0)
   gcc (0.1.0)
   ghostscript (0.1.0)
+  glances (0.1.0)
   graphviz (0.1.0)
   gtest (0.1.0)
   inkscape (0.1.0)
