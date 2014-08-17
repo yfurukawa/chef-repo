@@ -18,6 +18,8 @@
 	"recipe[doxygen]",
 	"recipe[java]",
 	"recipe[jenkins]",
+	"recipe[lm_sensors]",
+	"recipe[PySensors]",
 	"recipe[glances]"
   ],
   "automatic": {

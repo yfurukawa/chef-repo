@@ -1,4 +1,6 @@
 DEPENDENCIES
+  PySensors
+    path: site-cookbooks/PySensors
   boost
     path: site-cookbooks/boost
   cccc
@@ -28,6 +30,8 @@ DEPENDENCIES
     path: site-cookbooks/jenkins
   latex
     path: site-cookbooks/latex
+  lm_sensors
+    path: site-cookbooks/lm_sensors
   mysql-server
     path: site-cookbooks/mysql-server
   ntp
@@ -51,6 +55,7 @@ DEPENDENCIES
   yum-epel
 
 GRAPH
+  PySensors (0.1.0)
   boost (0.1.0)
   cccc (0.1.0)
   cppcheck (0.1.0)
@@ -66,6 +71,7 @@ GRAPH
   java (1.24.0)
   jenkins (0.1.0)
   latex (0.1.0)
+  lm_sensors (0.1.0)
   mysql-server (0.1.0)
   ntp (0.1.0)
   prepareForRedmine (0.1.0)
