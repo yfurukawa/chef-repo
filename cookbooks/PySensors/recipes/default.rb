@@ -7,15 +7,17 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "lm_sensors::default"
+
 execute "PySensors" do
-	command <<-EOH
-		cd #{Chef::Config[:file_cache_path]}
-		wget #{node['PySensors']['download_url']}/PySensors-#{node['PySensors']['version']}.tar.gz
-		tar xzf PySensors-#{node['PySensors']['version']}.tar.gz
-		cd PySensors-#{node['PySensors']['version']}
-		python setup.py build
-		python setup.py install
-	EOH
-	not_if{ Dir.exists?("/usr/lib/python2.6/site-packages/sensors") }
+  command <<-EOH
+    cd #{Chef::Config[:file_cache_path]}
+    wget #{node['PySensors']['download_url']}/PySensors-#{node['PySensors']['version']}.tar.gz
+    tar xzf PySensors-#{node['PySensors']['version']}.tar.gz
+    cd PySensors-#{node['PySensors']['version']}
+    python setup.py build
+    python setup.py install
+  EOH
+  not_if{ Dir.exists?("/usr/lib/python2.6/site-packages/sensors") }
 end
 

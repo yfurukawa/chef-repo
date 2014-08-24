@@ -17,6 +17,8 @@ DEPENDENCIES
     path: site-cookbooks/gcc
   ghostscript
     path: site-cookbooks/ghostscript
+  gimp
+    path: site-cookbooks/gimp
   glances
     path: site-cookbooks/glances
   graphviz
@@ -56,16 +58,20 @@ DEPENDENCIES
 
 GRAPH
   PySensors (0.1.0)
+    lm_sensors (>= 0.0.0)
   boost (0.1.0)
   cccc (0.1.0)
   cppcheck (0.1.0)
   doxygen (0.1.0)
+    graphviz (>= 0.0.0)
   eclipse (0.1.0)
   ftp (0.1.0)
   gcc (0.1.0)
   ghostscript (0.1.0)
+  gimp (0.1.0)
   glances (0.1.0)
   graphviz (0.1.0)
+    ruby (>= 0.0.0)
   gtest (0.1.0)
   inkscape (0.1.0)
   java (1.24.0)

@@ -1,26 +1,8 @@
 {
   "run_list": [ 
 	"recipe[yum-epel]",
-	"recipe[prepareForRedmine]",
-	"recipe[ruby]",
-	"recipe[mysql-server]",
-	"recipe[redmine]",
-	"recipe[gcc]",
-	"recipe[boost]",
-	"recipe[cccc]",
-	"recipe[gtest]",
-	"recipe[cppcheck]",
-	"recipe[eclipse]",
-	"recipe[ftp]",
-	"recipe[valgrind]",
-	"recipe[ntp]",
-	"recipe[graphviz]",
 	"recipe[doxygen]",
-	"recipe[java]",
-	"recipe[jenkins]",
-	"recipe[lm_sensors]",
-	"recipe[PySensors]",
-	"recipe[glances]"
+	"recipe[PySensors]"
   ],
   "automatic": {
     "ipaddress": "centos"
