@@ -6,6 +6,7 @@
     "recipe[boost]",
     "recipe[cccc]",
     "recipe[cppcheck]",
+    "recipe[graphviz]",
     "recipe[doxygen]",
     "recipe[eclipse]",
     "recipe[gtest]",

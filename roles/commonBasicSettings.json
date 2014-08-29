@@ -1,0 +1,9 @@
+{
+  "name" : "commonBasicSettings",
+  "run_list": [
+    "recipe[yum-epel]",
+    "recipe[ftp]",
+    "recipe[ntp]",
+    "recipe[xgdm_setting]"
+  ]
+}
