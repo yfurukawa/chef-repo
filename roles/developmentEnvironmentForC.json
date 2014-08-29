@@ -1,5 +1,5 @@
 {
-  "name" : "developmentEnvironmentForCpp",
+  "name" : "developmentEnvironmentForC",
   "run_list": [
     "recipe[yum-epel]",
     "recipe[gcc]",
