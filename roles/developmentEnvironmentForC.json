@@ -1,0 +1,17 @@
+{
+  "name" : "developmentEnvironmentForCpp",
+  "run_list": [
+    "recipe[yum-epel]",
+    "recipe[gcc]",
+    "recipe[boost]",
+    "recipe[cccc]",
+    "recipe[cppcheck]",
+    "recipe[doxygen]",
+    "recipe[eclipse]",
+    "recipe[gtest]",
+    "recipe[java]",
+    "recipe[jenkins]",
+    "recipe[valgrind]",
+    "recipe[vim]"
+  ]
+}
