@@ -1,0 +1,11 @@
+{
+  "name" : "redmineServer",
+  "run_list": [
+    "recipe[yum-epel]",
+    "recipe[prepareForRedmine]",
+    "recipe[ruby]",
+    "recipe[mysql-server]",
+    "recipe[redmine]",
+    "recipe[redmine_plugins]",
+  ]
+}
