@@ -51,7 +51,7 @@ end
 bash "pleiades" do
   code <<-EOH
     cd "#{Chef::Config[:file_cache_path]}/pleiades"
-    unzip #{node['eclipse']['pleiadesFile']}
+    unzip -u #{node['eclipse']['pleiadesFile']}
     mv plugins/* #{node['eclipse']['eclipse_home']}/eclipse/plugins/
     mv features/* #{node['eclipse']['eclipse_home']}/eclipse/features/
     echo "-javaagent:#{node['eclipse']['eclipse_home']}/eclipse/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" >> #{node['eclipse']['eclipse_home']}/eclipse/eclipse.ini
