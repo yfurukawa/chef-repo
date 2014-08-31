@@ -1,9 +1,12 @@
 {
   "name" : "commonBasicSettings",
+  "chef_type": "role",
+  "json_class": "role",
   "run_list": [
     "recipe[yum-epel]",
     "recipe[ftp]",
     "recipe[ntp]",
-    "recipe[xgdm_setting]"
+    "recipe[xgdm_setting]",
+    "recipe[devTools]"
   ]
 }
