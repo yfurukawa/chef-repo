@@ -1,5 +1,7 @@
 {
   "name" : "redmineServer",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
   "run_list": [
     "recipe[prepareForRedmine]",
     "recipe[ruby]",
