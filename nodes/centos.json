@@ -1,8 +1,7 @@
 {
   "run_list": [ 
-	"recipe[yum-epel]",
-	"recipe[doxygen]",
-	"recipe[PySensors]"
+	"recipe[prepareFiles]",
+	"recipe[tree]"
   ],
   "automatic": {
     "ipaddress": "centos"
