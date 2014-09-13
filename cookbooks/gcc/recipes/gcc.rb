@@ -24,3 +24,8 @@ execute "gcc_#{node['gcc']['version']}#{node['gcc']['version_prefix']}" do
   not_if { File.exists?("#{node['gnu']['prefix']}/bin/gcc") }
 end
 
+cookbook_file "/usr/local/bin/gcovr" do
+  source "gcovr"
+  mode 0555
+end
+

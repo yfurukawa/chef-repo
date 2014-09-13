@@ -1,6 +1,8 @@
 {
   "run_list": [ 
 	"recipe[prepareFiles]",
+	"recipe[pmd]",
+	"recipe[gcc]",
 	"recipe[tree]"
   ],
   "automatic": {
