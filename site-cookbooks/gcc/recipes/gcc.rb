@@ -11,8 +11,6 @@ remote_file "#{Chef::Config[:file_cache_path]}/gcc-#{node['gcc']['version']}#{no
   source "#{node['gcc']['gcc_url']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2"
 end
 
-# wget #{node['gcc']['gcc_url']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2
-
 execute "gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}" do
   command <<-EOH
     cd #{Chef::Config[:file_cache_path]}
