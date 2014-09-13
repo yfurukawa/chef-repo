@@ -3,6 +3,7 @@
 	"recipe[prepareFiles]",
 	"recipe[pmd]",
 	"recipe[gcc]",
+	"recipe[qt]",
 	"recipe[tree]"
   ],
   "automatic": {
