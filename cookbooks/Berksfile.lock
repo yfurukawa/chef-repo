@@ -9,6 +9,8 @@ DEPENDENCIES
     path: site-cookbooks/cccc
   cppcheck
     path: site-cookbooks/cppcheck
+  cpplint
+    path: site-cookbooks/cpplint
   devTools
     path: site-cookbooks/devTools
   doxygen
@@ -79,6 +81,7 @@ GRAPH
   boost (0.1.0)
   cccc (0.1.0)
   cppcheck (0.1.0)
+  cpplint (0.1.0)
   devTools (0.1.0)
   doxygen (0.1.0)
     graphviz (>= 0.0.0)
