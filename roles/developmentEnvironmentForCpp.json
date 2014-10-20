@@ -20,6 +20,7 @@
     "recipe[java]",
     "recipe[jenkins]",
     "recipe[valgrind]",
-    "recipe[vim]"
+    "recipe[vim]",
+    "recipe[cpplint]"
   ]
 }
