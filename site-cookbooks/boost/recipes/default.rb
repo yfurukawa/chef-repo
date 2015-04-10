@@ -14,7 +14,7 @@ bash "boost" do
     tar xjf #{node['boost']['program_name']}.tar.bz2
     cd #{node['boost']['program_name']}
     ./bootstrap.sh
-    ./b2 install -j8 --prefix=/usr/local
+    ./b2 install --prefix=/usr/local
     cd ..
   EOH
   not_if "/sbin/ldconfig -v | grep boost"
