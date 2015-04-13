@@ -12,3 +12,9 @@
   end
 end
 
+cookbook_file "/etc/init.d/jdk.sh" do
+  source "jdk.sh"
+  mode 00755
+  not_if { File.exists?( "/etc/init.d/jdk.sh" ) }
+end
+

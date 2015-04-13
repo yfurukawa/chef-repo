@@ -1,0 +1,29 @@
+{
+  "ruby": {
+    "version": "2.0.0-p643"
+  },
+  "boost": {
+    "version": "1.57.0",
+    "program_name": "boost_1_57_0"
+  },
+  "eclipse": {
+    "eclipse_base": "eclipse-java-luna-SR2-linux-gtk-x86_64",
+    "eclipse_download_url": "http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/luna/SR2"
+  },
+  "run_list": [ 
+	"recipe[yum-epel]",
+	"recipe[devTools]",
+	"recipe[alacarte]",
+	"recipe[cccc]",
+	"recipe[cppcheck]",
+	"recipe[doxygen]",
+	"recipe[openjdk]",
+	"recipe[boost]",
+	"recipe[gtest]",
+	"recipe[apache-tomcat]",
+	"recipe[findbugs]",
+	"recipe[cpplint]",
+	"recipe[pmd]",
+	"recipe[eclipse]"
+  ]
+}

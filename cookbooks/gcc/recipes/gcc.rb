@@ -7,13 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 
-remote_file "#{Chef::Config[:file_cache_path]}/gcc_#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2" do
+remote_file "#{Chef::Config[:file_cache_path]}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2" do
   source "#{node['gcc']['gcc_url']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2"
 end
 
-# wget #{node['gcc']['gcc_url']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}/gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2
-
-execute "gcc_#{node['gcc']['version']}#{node['gcc']['version_prefix']}" do
+execute "gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}" do
   command <<-EOH
     cd #{Chef::Config[:file_cache_path]}
     tar xjf gcc-#{node['gcc']['version']}#{node['gcc']['version_prefix']}.tar.bz2
