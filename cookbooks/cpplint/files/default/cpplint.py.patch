@@ -1,0 +1,20 @@
+--- cpplint.py	2014-10-13 21:53:34.328464234 +0900
++++ cpplintNew.py	2014-10-13 22:06:58.270178260 +0900
+@@ -6040,7 +6040,7 @@
+   if message:
+     sys.exit('\nFATAL ERROR: ' + message)
+   else:
+-    sys.exit(1)
++    sys.exit(0)
+ 
+ 
+ def PrintCategories():
+@@ -6137,7 +6137,7 @@
+     ProcessFile(filename, _cpplint_state.verbose_level)
+   _cpplint_state.PrintErrorCounts()
+ 
+-  sys.exit(_cpplint_state.error_count > 0)
++  sys.exit(0)
+ 
+ 
+ if __name__ == '__main__':

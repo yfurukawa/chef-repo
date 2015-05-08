@@ -1,0 +1,11 @@
+{
+  "run_list": [ 
+	"recipe[jenkins]",
+	"recipe[oldgcc]",
+	"recipe[cccc]",
+	"recipe[cppcheck]",
+	"recipe[vakgrind]",
+	"recipe[gtest]",
+	"recipe[tree]"
+  ]
+}

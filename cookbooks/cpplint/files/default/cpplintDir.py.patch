@@ -1,0 +1,37 @@
+--- cpplint.py	2014-10-13 21:53:46.888101486 +0900
++++ cpplintNew.py	2014-10-13 22:23:21.701314234 +0900
+@@ -6040,7 +6040,7 @@
+   if message:
+     sys.exit('\nFATAL ERROR: ' + message)
+   else:
+-    sys.exit(1)
++    sys.exit(0)
+ 
+ 
+ def PrintCategories():
+@@ -6123,7 +6123,7 @@
+ 
+ 
+ def main():
+-  filenames = ParseArguments(sys.argv[1:])
++  baseDirName = ParseArguments(sys.argv[1:])
+ 
+   # Change stderr to write with replacement characters so we don't die
+   # if we try to print something containing non-ASCII characters.
+@@ -6133,11 +6133,13 @@
+                                          'replace')
+ 
+   _cpplint_state.ResetErrorCounts()
+-  for filename in filenames:
+-    ProcessFile(filename, _cpplint_state.verbose_level)
++  for dname in baseDirName:
++    for root, dirs, files in os.walk(dname):
++      for fname in files:
++        ProcessFile(os.path.join(root, fname), _cpplint_state.verbose_level)
+   _cpplint_state.PrintErrorCounts()
+ 
+-  sys.exit(_cpplint_state.error_count > 0)
++  sys.exit(0)
+ 
+ 
+ if __name__ == '__main__':
