@@ -34,7 +34,7 @@ bash "cdt" do
     mv plugins/* #{node['eclipse']['eclipse_home']}/eclipse/plugins/
     mv features/* #{node['eclipse']['eclipse_home']}/eclipse/features/
   EOH
-  not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/eclipse/plugins/org.eclipse.cdt_#{node['eclipse']['cdt_version']}.*.jar") }
+  not_if{ File.exists?("#{node['eclipse']['eclipse_home']}/eclipse/plugins/org.eclipse.cdt*.jar") }
 end
 
 directory "#{Chef::Config[:file_cache_path]}/pleiades" do
@@ -65,3 +65,35 @@ template "/usr/share/applications/eclipse.desktop" do
   not_if { File.exists?("/usr/share/applications/eclipse.desktop") }
 end
 
+bash "cppcheclipse" do
+  code <<-EOH
+    cd #{Chef::Config[:file_cache_path]}
+    wget --no-check-certificate #{node['cppcheclipse']['download_url']}/cppcheclipse_#{node['cppcheclipse']['version']}.zip
+    unzip cppcheclipse_#{node['cppcheclipse']['version']}.zip
+    mv plugins/* #{node['eclipse']['eclipse_home']}/eclipse/plugins/
+    mv features/* #{node['eclipse']['eclipse_home']}/eclipse/features/
+  EOH
+  not_if{ File.exists?("#node['eclipse']['eclipse_home']}/eclipse/plugins/com.googlecode.cppcheclipse.core_#{node['cppcheclipse']['version']}.jar") }
+end
+
+#directory "#{Chef::Config[:file_cache_path]}/checkstyle" do
+#  owner "root"
+#  group "root"
+#  mode 00755
+#  action :create
+#end
+#
+#bash "checkstyle" do
+#  code <<-EOH
+#    cd #{Chef::Config[:file_cache_path]}/checkstyle
+#    mkdir features
+#    mkdir plugins
+##wget --no-check-certificate #{node['checkstyle']['download_url']}/net.sf.eclipsecs-updatesite_#{node['checkstyle']['version']}-bin.zip
+#    cd features
+#    wget --no-check-certificate #{node['checkstyle']['download_url']}/features/*"
+#    wget --no-check-certificate #{node['checkstyle']['download_url']}/plugins"
+##    unzip cppcheclipse_#{node['checkstyle']['version']}.zip
+#    mv plugins/* #{node['eclipse']['eclipse_home']}/eclipse/plugins/
+#    mv features/* #{node['eclipse']['eclipse_home']}/eclipse/features/
+#  EOH
+#end

@@ -65,3 +65,25 @@ template "/usr/share/applications/eclipse.desktop" do
   not_if { File.exists?("/usr/share/applications/eclipse.desktop") }
 end
 
+bash "cppcheclipse" do
+  code <<-EOH
+    cd #{Chef::Config[:file_cache_path]}
+    wget --no-check-certificate #{node['cppcheclipse']['download_url']}/cppcheclipse_#{node['cppcheclipse']['version']}.zip
+    unzip cppcheclipse_#{node['cppcheclipse']['version']}.zip
+    mv plugins/* #{node['eclipse']['eclipse_home']}/eclipse/plugins/
+    mv features/* #{node['eclipse']['eclipse_home']}/eclipse/features/
+  EOH
+  not_if{ File.exists?("#node['eclipse']['eclipse_home']}/eclipse/plugins/com.googlecode.cppcheclipse.core_#{node['cppcheclipse']['version']}.jar") }
+end
+
+bash "checkstyle" do
+  code <<-EOH
+    cd #{Chef::Config[:file_cache_path]}
+#wget --no-check-certificate #{node['checkstyle']['download_url']}/net.sf.eclipsecs-updatesite_#{node['checkstyle']['version']}-bin.zip
+    wget --no-check-certificate #{node['checkstyle']['download_url']}/features"
+    wget --no-check-certificate #{node['checkstyle']['download_url']}/plugins"
+#    unzip cppcheclipse_#{node['checkstyle']['version']}.zip
+    mv plugins/* #{node['eclipse']['eclipse_home']}/eclipse/plugins/
+    mv features/* #{node['eclipse']['eclipse_home']}/eclipse/features/
+  EOH
+end
